@@ -10,36 +10,133 @@ export default function Home() {
         <h1 className="text-3xl font-semibold pb-5">
           Event list
         </h1>
-        <div className="my-10 flex gap-6">
-          <article>
+        <div className="my-10 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 w-full">
+          <article className="">
             <Image
               src={imageSrc}
               alt="Event Picture"
               width={300}
               height={250}
-              className="w-full"
+              className="w-full pb-2"
             />
-            <span className="font-bold text-lg block">Event name</span>
-            <div className="flex">
+            <span className="font-bold text-lg block flex-1">
+              Bruce Springsteen Ullevi, Göteborg
+            </span>
+            <div className="flex py-1">
               <span className="text-gray-500 text-sm font-semibold flex-1">18 jun, 2024</span>
               <span className="text-gray-500 text-sm font-semibold">99 USD</span>
             </div>
+            <div className="flex">
+              <span className="text-sm">
+                34 spots left
+              </span>
+            </div>
           </article>
-          <article>
+          <article className="">
             <Image
               src={imageSrc}
               alt="Event Picture"
               width={300}
               height={250}
-              className="w-full"
+              className="w-full pb-2"
             />
-            <span className="font-bold text-lg block">Event name</span>
-            <div className="flex">
+            <span className="font-bold text-lg block flex-1">
+              Bruce Springsteen Ullevi, Göteborg
+            </span>
+            <div className="flex py-1">
               <span className="text-gray-500 text-sm font-semibold flex-1">18 jun, 2024</span>
               <span className="text-gray-500 text-sm font-semibold">99 USD</span>
             </div>
+            <div className="flex">
+              <span className="text-sm">
+                34 spots left
+              </span>
+            </div>
           </article>
-
+          <article className="">
+            <Image
+              src={imageSrc}
+              alt="Event Picture"
+              width={300}
+              height={250}
+              className="w-full pb-2"
+            />
+            <span className="font-bold text-lg block flex-1">
+              Bruce Springsteen Ullevi, Göteborg
+            </span>
+            <div className="flex py-1">
+              <span className="text-gray-500 text-sm font-semibold flex-1">18 jun, 2024</span>
+              <span className="text-gray-500 text-sm font-semibold">99 USD</span>
+            </div>
+            <div className="flex">
+              <span className="text-sm">
+                34 spots left
+              </span>
+            </div>
+          </article>
+          <article className="">
+            <Image
+              src={imageSrc}
+              alt="Event Picture"
+              width={300}
+              height={250}
+              className="w-full pb-2"
+            />
+            <span className="font-bold text-lg block flex-1">
+              Bruce Springsteen Ullevi, Göteborg
+            </span>
+            <div className="flex py-1">
+              <span className="text-gray-500 text-sm font-semibold flex-1">18 jun, 2024</span>
+              <span className="text-gray-500 text-sm font-semibold">99 USD</span>
+            </div>
+            <div className="flex">
+              <span className="text-sm">
+                34 spots left
+              </span>
+            </div>
+          </article>
+          <article className="">
+            <Image
+              src={imageSrc}
+              alt="Event Picture"
+              width={300}
+              height={250}
+              className="w-full pb-2"
+            />
+            <span className="font-bold text-lg block flex-1">
+              Bruce Springsteen Ullevi, Göteborg
+            </span>
+            <div className="flex py-1">
+              <span className="text-gray-500 text-sm font-semibold flex-1">18 jun, 2024</span>
+              <span className="text-gray-500 text-sm font-semibold">99 USD</span>
+            </div>
+            <div className="flex">
+              <span className="text-sm">
+                34 spots left
+              </span>
+            </div>
+          </article>
+          <article className="">
+            <Image
+              src={imageSrc}
+              alt="Event Picture"
+              width={300}
+              height={250}
+              className="w-full pb-2"
+            />
+            <span className="font-bold text-lg block flex-1">
+              Bruce Springsteen Ullevi, Göteborg
+            </span>
+            <div className="flex py-1">
+              <span className="text-gray-500 text-sm font-semibold flex-1">18 jun, 2024</span>
+              <span className="text-gray-500 text-sm font-semibold">99 USD</span>
+            </div>
+            <div className="flex">
+              <span className="text-sm">
+                34 spots left
+              </span>
+            </div>
+          </article>
         </div>
       </div>
       
