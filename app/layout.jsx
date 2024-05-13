@@ -1,8 +1,10 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from './components/header';
-import Footer from './components/footer';
+import ConvexClientProvider from '../components/providers/convex-client-providers';
+import Footer from '../app/components/footer';
+import Header from '../app/components/header'
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,18 +15,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+ 
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body>
 
-          <Header />
-          
+        <Header />
+
+        <ConvexClientProvider>
           {children}
-          
-          <Footer />
+          </ConvexClientProvider>
 
+          <Footer />
         </body>
       </html>
-    </ClerkProvider>
+  
   );
 }
