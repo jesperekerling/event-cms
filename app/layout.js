@@ -1,7 +1,7 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Menu from './components/menu';
+import Header from './components/header';
 import Footer from './components/footer';
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,9 +16,13 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <Menu />
+
+          <Header />
+          
           {children}
+          
           <Footer />
+
         </body>
       </html>
     </ClerkProvider>
