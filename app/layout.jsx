@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ConvexClientProvider from '../components/providers/convex-client-providers';
@@ -18,10 +17,10 @@ export default function RootLayout({ children }) {
  
       <html lang="en" suppressHydrationWarning>
         <body>
-
+         
         <Header />
 
-        <ConvexClientProvider>
+          <ConvexClientProvider>
           {children}
           </ConvexClientProvider>
 
