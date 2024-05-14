@@ -38,3 +38,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 >>>>>>> 88d286e2bc1544d2632874fc7c87252a467aa398
+
+.env.local
