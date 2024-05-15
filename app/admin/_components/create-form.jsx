@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import toast from "react-hot-toast";
+
 
 
 
@@ -56,13 +58,20 @@ export default function Create() {
 
        
 
-        await createEvent({imageId, title, description, date, location, seats})
+        try {
+            await createEvent({imageId, title, description, date, location, seats})
+            toast.success('Event created successfully')
+        } catch (error) {
+            toast.error('Failed to create event')
+            console.error(error);
+        }
+        
         setTitle('')
         setDescription('')
         setDate('')
         setLocation('')
         setSeats('')
-        setSelectedImage(null)
+        // setSelectedImage(null)
     }
 
 
@@ -81,7 +90,7 @@ export default function Create() {
                 <Input id="description" value={description} onChange={ e => setDescription(e.target.value)} />
 
                 <Label htmlFor="date">Date:</Label>
-                <Input id="date" value={date} onChange={ e => setDate(e.target.value)} />
+                <Input id="date" type="date" value={date} onChange={ e => setDate(e.target.value)} />
 
                 <Label htmlFor="location">Location:</Label>
                 <Input id="location" value={location} onChange={ e => setLocation(e.target.value)} />
