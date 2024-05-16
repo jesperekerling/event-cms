@@ -23,29 +23,29 @@ export const createEvent = mutation({
     }
 })
 
-// export const getAll = query({
-//     args: {},
-//     handler: async (ctx) => {
+export const getAll = query({
+    args: {},
+    handler: async (ctx) => {
         
-//         const events = await ctx.db.query("events").collect()
+        const events = await ctx.db.query("events").collect()
 
-//         const eventsImageUrls = await Promise.all(events.map(async (event) => {
-//             let imageUrl = null;
-//             try {
-//                 imageUrl = await ctx.storage.getUrl(event.imageId);
-//             } catch (error) {
-//                 console.error(`Failed to get image URL for imageId ${event.imageId}: ${error}`);
-//             }
+        const eventsImageUrls = await Promise.all(events.map(async (event) => {
+            let imageUrl = null;
+            try {
+                imageUrl = await ctx.storage.getUrl(event.imageId);
+            } catch (error) {
+                console.error(`Failed to get image URL for imageId ${event.imageId}: ${error}`);
+            }
 
-//             return {
-//                 ...event,
-//                 image: imageUrl
-//             };
-//         }))
+            return {
+                ...event,
+                image: imageUrl
+            };
+        }))
 
-//         return eventsImageUrls
-//     }
-// })
+        return eventsImageUrls
+    }
+})
 
 
 // export const getById = query({
