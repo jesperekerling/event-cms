@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 
@@ -8,16 +8,18 @@ export const createEvent = mutation({
         description: v.string(),
         date: v.string(),
         location: v.string(),
-        seats: v.number(),
+        seats: v.string(),
         imageId: v.id ("_storage"),
-        user: v.id("users")
+        // user: v.id("users")
     },
     
-    handler: async (ctx, { title, description, date, location, seats, imageId }) => {
+    handler: async (ctx, title, description, date, location, seats, imageId) => {
+        const identity = await ctx.auth.getUserIdentity()
+        if (!identity) 
+            throw new ConvexError("Unauthenticated")
+        
+        await ctx.db.insert("events", { imageId, title, description, date, location, seats})
 
-        
-        await ctx.db.insert("events", {title, description, date, location, seats, imageId})
-        
     }
 })
 
@@ -46,23 +48,23 @@ export const getAll = query({
 })
 
 
-export const getById = query({
-    args: {
-        eventId: v.id("events")
-    },
-    handler: async (ctx, { eventId }) => {
-        const event = await ctx.db.get("events", eventId)
+// export const getById = query({
+//     args: {
+//         eventId: v.id("events")
+//     },
+//     handler: async (ctx, { eventId }) => {
+//         const event = await ctx.db.get("events", eventId)
        
-        let imageUrl = null;
-        try {
-            imageUrl = await ctx.storage.getUrl(event.imageId);
-        } catch (error) {
-            console.error(`Failed to get image URL for imageId ${event.imageId}: ${error}`);
-        }
+//         let imageUrl = null;
+//         try {
+//             imageUrl = await ctx.storage.getUrl(event.imageId);
+//         } catch (error) {
+//             console.error(`Failed to get image URL for imageId ${event.imageId}: ${error}`);
+//         }
         
-        return {
-              ...event,
-              image: await ctx.storage.getUrl(event.imageId)
-       }
-    }
-})
+//         return {
+//               ...event,
+//               image: await ctx.storage.getUrl(event.imageId)
+//        }
+//     }
+// })
