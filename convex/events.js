@@ -8,17 +8,18 @@ export const createEvent = mutation({
         description: v.string(),
         date: v.string(),
         location: v.string(),
+        price: v.string(),
         seats: v.string(),
         imageId: v.id ("_storage"),
-        // user: v.id("users")
+        
     },
     
-    handler: async (ctx, title, description, date, location, seats, imageId) => {
+    handler: async (ctx, title, description, date, location, price, seats, imageId) => {
         const identity = await ctx.auth.getUserIdentity()
         if (!identity) 
             throw new ConvexError("Unauthenticated")
         
-        await ctx.db.insert("events", { imageId, title, description, date, location, seats})
+        await ctx.db.insert("events", { imageId, title, description, date, location, price, seats})
 
     }
 })
