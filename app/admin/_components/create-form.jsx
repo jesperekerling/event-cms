@@ -28,12 +28,13 @@ export default function Create() {
     const [description, setDescription] = useState('')
     const [date, setDate] = useState('')
     const [location, setLocation] = useState('')
+    const [price, setPrice] = useState('')
     const [seats,setSeats] = useState('')
 
     const handleSubmit = async e => {
         e.preventDefault()
 
-        if(title.trim() == '' || description.trim() == '' || date.trim() == '' || location.trim() == '' || seats.trim() == '') 
+        if(title.trim() == '' || description.trim() == '' || date.trim() == '' || location.trim() == '' || price.trim() =='' || seats.trim() == '') 
             throw new Error('All fields are required')
        
             let imageId
@@ -59,7 +60,7 @@ export default function Create() {
        
 
         try {
-            await createEvent({imageId, title, description, date, location, seats})
+            await createEvent({imageId, title, description, date, location, price, seats})
             toast.success('Event created successfully')
         } catch (error) {
             toast.error('Failed to create event')
@@ -70,8 +71,9 @@ export default function Create() {
         setDescription('')
         setDate('')
         setLocation('')
+        setPrice('')
         setSeats('')
-        // setSelectedImage(null)
+        setSelectedImage(null) //Function to clear the image after submission, does not work
     }
 
 
@@ -94,6 +96,9 @@ export default function Create() {
 
                 <Label htmlFor="location">Location:</Label>
                 <Input id="location" value={location} onChange={ e => setLocation(e.target.value)} />
+
+                <Label htmlFor="price">Price:</Label>
+                <Input id="price" value={price} onChange={ e => setPrice(e.target.value)} />
 
                 <Label htmlFor="seats">Seats:</Label>
                 <Input id="seats" value={seats} onChange={ e => setSeats(e.target.value)} />
