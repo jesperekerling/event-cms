@@ -9,8 +9,8 @@ export default defineSchema({
       description: v.string(),
       imageId: v.id("_storage"),
       location: v.string(),
-      price: v.float64(),
-      seats: v.float64(),
+      price: v.string(),
+      seats: v.string(),
      
     }),
   }),
