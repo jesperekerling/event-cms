@@ -8,8 +8,8 @@ export const createEvent = mutation({
         description: v.string(),
         date: v.string(),
         location: v.string(),
-        price: v.string(),
-        seats: v.string(),
+        price: v.float64(),
+        seats: v.float64(),
         imageId: v.id ("_storage"),
         
     },
