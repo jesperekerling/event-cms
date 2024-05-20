@@ -5,9 +5,9 @@ import Image from "next/image"
 import { useState } from "react"
 
 
-export const ImagePicker = ({imgSrc, setSelectedImage}) => {
+export const ImagePicker = ({imgSrc, setSelectedImage, setImageSrc}) => {
 
-    const [imageSrc, setImageSrc] = useState(imgSrc)
+ 
 
     const setImage = (e) => {
         if (!e.target.files || !e.target.files [0]) {
@@ -27,12 +27,12 @@ export const ImagePicker = ({imgSrc, setSelectedImage}) => {
        
     <>
     {
-         imageSrc ? (
+         imgSrc ? (
             <div className="w-fit mx-auto">
             <div className="border rounded aspect-square max-w-[400px] mx-auto overflow-hidden">
               <Image
                alt="event image"
-               src={imageSrc}
+               src={imgSrc}
                width={300}
                height={300}
                className="object-cover w-full h-full"

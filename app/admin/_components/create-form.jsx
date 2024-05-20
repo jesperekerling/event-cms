@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 
@@ -17,12 +18,14 @@ import toast from "react-hot-toast";
 
 export default function Create() {
 
-
+const router = useRouter()
 
     const generateUploadUrl = useMutation(api.images.generateUploadUrl)
     const createEvent = useMutation(api.events.createEvent)
 
     const [selectedImage, setSelectedImage] = useState(null)
+
+    const [imageSrc, setImageSrc] = useState()
     
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -38,6 +41,8 @@ export default function Create() {
             throw new Error('All fields are required')
        
             let imageId
+
+            console.log(typeof date)
 
         try {
             if (selectedImage) {
@@ -60,7 +65,7 @@ export default function Create() {
        
 
         try {
-            await createEvent({imageId, title, description, date, location, price, seats})
+            await createEvent({imageId, title, description, date, location, price: +price, seats: +seats})
             toast.success('Event created successfully')
         } catch (error) {
             toast.error('Failed to create event')
@@ -74,6 +79,8 @@ export default function Create() {
         setPrice('')
         setSeats('')
         setSelectedImage(null) //Function to clear the image after submission, does not work
+        setImageSrc(null) //Function to clear the image after submission, does not work
+        
     }
 
 
@@ -81,7 +88,7 @@ export default function Create() {
     return (
 
         <div>
-          <ImagePicker setSelectedImage={setSelectedImage} />
+          <ImagePicker setSelectedImage={setSelectedImage} imgSrc={imageSrc} setImageSrc={setImageSrc} />
 
           <form onSubmit={handleSubmit} className="mt-6">
             <div>
@@ -98,10 +105,10 @@ export default function Create() {
                 <Input id="location" value={location} onChange={ e => setLocation(e.target.value)} />
 
                 <Label htmlFor="price">Price:</Label>
-                <Input id="price" value={price} onChange={ e => setPrice(e.target.value)} />
+                <Input id="price" type="number" value={price} onChange={ e => setPrice(e.target.value)} />
 
                 <Label htmlFor="seats">Seats:</Label>
-                <Input id="seats" value={seats} onChange={ e => setSeats(e.target.value)} />
+                <Input id="seats" type="number" value={seats} onChange={ e => setSeats(e.target.value)} />
 
             </div>
             <Button className="mt-6">Add Event</Button>
