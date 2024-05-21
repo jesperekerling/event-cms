@@ -11,6 +11,7 @@ export default defineSchema({
       location: v.string(),
       price: v.number(),
       seats: v.number(),
+      // attendees: v.array(v.id("_user")),
      
     
   }),

@@ -18,7 +18,7 @@ import { ImagePicker } from "../../_components/image-picker";
 
 export default function Edit({event}) {
 
-    if(!event) return
+   
 
 const router = useRouter()
 
@@ -27,7 +27,7 @@ const router = useRouter()
     const deleteEvent = useAction(api.events.deleteEvent)
     const deleteImage = useMutation(api.images.deleteImage)
 
-    const [imageSrc, setImageSrc] = useState()
+    const [imageSrc, setImageSrc] = useState(event.image || null)
    
     const [selectedImage, setSelectedImage] = useState(null) // ska det vara null??
     const [title, setTitle] = useState(event.title)
@@ -43,8 +43,8 @@ const router = useRouter()
     const handleSubmit = async e => {
         e.preventDefault()
 
-        // if(title.trim() == '' || description.trim() == '' || date.trim() == '' || location.trim() == '' || price.trim() =='' || seats.trim() == '') 
-        //     return
+        if(title.trim() == '' || description.trim() == '' || date.trim() == '' || location.trim() == '' || price == 0 || seats == 0) 
+            return
        
             let imgData
 
@@ -90,16 +90,16 @@ const router = useRouter()
         }
 
         const handleDelete = async () => {
-            await deleteEvent({id: event._id})
+            deleteEvent({id: event._id})
             router.replace('/admin/events')
         }
 
 
-
+        if(!event) return null
     return (
 
         <div>
-          <ImagePicker imgSrc={event.image} setSelectedImage={setSelectedImage} />
+          <ImagePicker imgSrc={imageSrc} setSelectedImage={setSelectedImage} setImageSrc={setImageSrc} />
           <Button variant="destructive" onClick={handleDelete} className="mt-6">Delete Event</Button>
 
           <form onSubmit={handleSubmit} className="mt-6">
