@@ -4,13 +4,19 @@ import { api } from "@/convex/_generated/api"
 import { useQuery } from "convex/react"
 import Image from "next/image"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+
 
 export const AllEvents = () => {
 
   const events = useQuery(api.events.getAll)
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-gray-100 rounded">
+    <div className="">
+      <Link href="/admin/create">
+        <Button className="mt-6">Create event</Button>
+      </Link>
+
       {events?.map(event => (
         <Link href={'/admin/'+event._id} key={event._id} className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:bg-gray-50 transition">
           <div className="h-16 w-16 overflow-hidden rounded-lg flex-shrink-0">
