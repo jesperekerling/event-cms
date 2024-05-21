@@ -12,7 +12,7 @@ export const AllEvents = () => {
   return (
     <div className="flex flex-col gap-2">
       {events?.map(event => (
-        <Link href={'/admin/edit/'+event._id} key={event._id} className="h-16 flex items-center justify-between cursor-pointer group hover:bg-slate-50/10 rounded pr-4">
+        <Link href={'/admin/'+event._id} key={event._id} className="h-16 flex items-center justify-between cursor-pointer group hover:bg-slate-50/10 rounded pr-4">
           <div className="h-full aspect-square overflow-auto rounded">
             {
               event.image

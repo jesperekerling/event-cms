@@ -1,15 +1,17 @@
 'use client'
 
-import { Toaster } from "react-hot-toast";
-import Edit from "../_components/edit-form";
-import { useParams } from "next/navigation";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { Toaster } from 'react-hot-toast';
+import { useParams, useRouter } from 'next/navigation';
+import Edit from './_component/edit-form';
 
 
 
 
 export default function EditPage() {
+
+const router = useRouter()
 
     const { id } = useParams()
 

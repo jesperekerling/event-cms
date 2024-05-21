@@ -3,7 +3,6 @@
 
 
 import { useState } from "react";
-import { ImagePicker } from "./image-picker";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +10,7 @@ import { useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { ImagePicker } from "../../_components/image-picker";
 
 
 
@@ -27,6 +27,8 @@ const router = useRouter()
     const deleteEvent = useAction(api.events.deleteEvent)
     const deleteImage = useMutation(api.images.deleteImage)
 
+    const [imageSrc, setImageSrc] = useState()
+   
     const [selectedImage, setSelectedImage] = useState(null) // ska det vara null??
     const [title, setTitle] = useState(event.title)
     const [description, setDescription] = useState(event.description)
@@ -41,8 +43,8 @@ const router = useRouter()
     const handleSubmit = async e => {
         e.preventDefault()
 
-        if(title.trim() == '' || description.trim() == '' || date.trim() == '' || location.trim() == '' || price.trim() =='' || seats.trim() == '') 
-            return
+        // if(title.trim() == '' || description.trim() == '' || date.trim() == '' || location.trim() == '' || price.trim() =='' || seats.trim() == '') 
+        //     return
        
             let imgData
 
@@ -68,12 +70,12 @@ const router = useRouter()
 
             await updateEvent({
                 id: event._id,
-                title,
-                description,
-                date,
-                location,
-                price,
-                seats,
+                title: title,
+                description: description,
+                date: date,
+                location: location,
+                price: +price,
+                seats: +seats,
                 imageId: imgData?.storageId ? imgData.storageId : event.imageId
             })
 
@@ -83,11 +85,13 @@ const router = useRouter()
             setLocation('')
             setPrice('')
             setSeats('')
+            router.push('/admin/events')
 
         }
 
         const handleDelete = async () => {
             await deleteEvent({id: event._id})
+            router.replace('/admin/events')
         }
 
 
@@ -95,7 +99,7 @@ const router = useRouter()
     return (
 
         <div>
-          <ImagePicker setSelectedImage={setSelectedImage} imgSrc={imageSrc} setImageSrc={setImageSrc} />
+          <ImagePicker imgSrc={event.image} setSelectedImage={setSelectedImage} />
           <Button variant="destructive" onClick={handleDelete} className="mt-6">Delete Event</Button>
 
           <form onSubmit={handleSubmit} className="mt-6">

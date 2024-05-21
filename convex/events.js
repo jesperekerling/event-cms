@@ -97,6 +97,7 @@ export const getById = query({
   export const deleteEvent = action({
     args: {
       id: v.id("events")
+  
     },
     handler: async (ctx, args) => {
       const identity = await ctx.auth.getUserIdentity()
@@ -111,12 +112,6 @@ export const getById = query({
   export const deleteForReal = internalMutation({
     args: {
         eventId: v.id('events'),
-        // title: v.string(),
-        // description: v.string(),
-        // date: v.string(),
-        // location: v.string(),
-        // price: v.number(),
-        // seats: v.number(),
         imageId: v.id ("_storage"),
     },
     handler: async (ctx, args) => {
