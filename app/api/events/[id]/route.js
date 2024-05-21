@@ -9,3 +9,5 @@ export async function GET(request, { params }) {
 
   return NextResponse.json(event, { status: 200 })
 }
+
+// plats för att avboka en biljett
