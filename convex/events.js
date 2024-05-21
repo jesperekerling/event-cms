@@ -1,5 +1,7 @@
 import { ConvexError, v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query, action, internalMutation } from "./_generated/server";
+import { api, internal } from "./_generated/api";
+
 
 
 export const createEvent = mutation({
@@ -50,23 +52,76 @@ export const getAll = query({
 })
 
 
-// export const getById = query({
-//     args: {
-//         eventId: v.id("events")
-//     },
-//     handler: async (ctx, { eventId }) => {
-//         const event = await ctx.db.get("events", eventId)
-       
-//         let imageUrl = null;
-//         try {
-//             imageUrl = await ctx.storage.getUrl(event.imageId);
-//         } catch (error) {
-//             console.error(`Failed to get image URL for imageId ${event.imageId}: ${error}`);
-//         }
-        
-//         return {
-//               ...event,
-//               image: await ctx.storage.getUrl(event.imageId)
-//        }
-//     }
-// })
+export const getById = query({
+    args: {
+      eventId: v.id("events")
+    },
+    handler: async (ctx, args) => {
+  
+      const event = await ctx.db.get(args.eventId)
+  
+      return {
+        ...event,
+        image: event.imageId ? await ctx.storage.getUrl(event.imageId) : undefined
+      }
+    }
+  })
+
+  export const updateEvent = mutation({
+    args: {
+      id: v.id('events'),
+      title: v.string(),
+      description: v.string(),
+      date: v.string(),
+      location: v.string(),
+      price: v.number(),
+      seats: v.number(),
+      imageId: v.id ("_storage"),
+    },
+    handler: async (ctx, args) => {
+      const identity = await ctx.auth.getUserIdentity()
+      if(!identity) throw new ConvexError('Unauthorized')
+  
+      return await ctx.db.patch(args.id, {
+        title: args.title,
+        description: args.description,
+        date: args.date,
+        location: args.location,
+        price: args.price,
+        seats: args.seats,
+        imageId: args.imageId ? args.imageId : undefined
+      })
+    }
+  })
+
+  export const deleteEvent = action({
+    args: {
+      id: v.id("events")
+    },
+    handler: async (ctx, args) => {
+      const identity = await ctx.auth.getUserIdentity()
+      if(!identity) throw new ConvexError('Unauthorized')
+  
+      const event = await ctx.runQuery(api.events.getById, { eventId: args.id })
+  
+      await ctx.runMutation(internal.events.deleteForReal, { eventId: event._id, imageId: event.imageId })
+    }
+  })
+  
+  export const deleteForReal = internalMutation({
+    args: {
+        eventId: v.id('events'),
+        // title: v.string(),
+        // description: v.string(),
+        // date: v.string(),
+        // location: v.string(),
+        // price: v.number(),
+        // seats: v.number(),
+        imageId: v.id ("_storage"),
+    },
+    handler: async (ctx, args) => {
+      await ctx.db.delete(args.eventId)
+      await ctx.storage.delete(args.imageId)
+    }
+  })
+  
