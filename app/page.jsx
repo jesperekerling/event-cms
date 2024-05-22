@@ -29,9 +29,12 @@ export default function Landingpage() {
       
       <UserButton/>
         <p>Your are Logged in!</p>
-       <button className="px-8 py-3 mt-3 mr-2 bg-blue-500 mb-4 text-white rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">Create</button> 
+        <Link href="/admin/create" passHref>
+                <button className="px-8 py-3 mt-3 mr-2 bg-blue-500 mb-4 text-white rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">Create</button>
+              </Link> 
+              <Link href="/admin/events" passHref>
        <button className="px-8 py-3 mt-3 bg-blue-500 mb-4 text-white rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">View Events</button> 
-       
+       </Link>
       </SignedIn>
       </div>
 
