@@ -35,6 +35,9 @@ export default function Landingpage() {
               <Link href="/admin/events" passHref>
        <button className="px-8 py-3 mt-3 bg-blue-500 mb-4 text-white rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">View Events</button> 
        </Link>
+       <Link href="/admin/editPage" passHref>
+       <button className="px-8 py-3 mt-3 ml-2 bg-blue-500 mb-4 text-white rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">Edit Pages</button> 
+       </Link>
       </SignedIn>
       </div>
 
