@@ -27,6 +27,25 @@ export const createEvent = mutation({
     }
 })
 
+export const updatePosts = mutation({
+  args: {
+      title: v.string(),
+      description: v.string(),
+      imageId: v.id ("_storage"),
+      
+  },
+  
+  handler: async (ctx, {title, description}) => {
+      const identity = await ctx.auth.getUserIdentity()
+      if (!identity) 
+          throw new ConvexError("Unauthenticated")
+      
+      await ctx.db.insert("posts", { title, description, imageId})
+    
+
+  }
+})
+
 export const getAll = query({
     args: {},
     handler: async (ctx) => {

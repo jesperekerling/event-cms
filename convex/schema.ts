@@ -11,7 +11,7 @@ export default defineSchema({
     price: v.number(),
     seats: v.number(),
   }),
-  changingLandingpage: defineTable({
+  posts: defineTable({
     description: v.string(),
     title: v.string(),
   }),

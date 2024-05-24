@@ -4,24 +4,30 @@ import React from 'react'
 import { toast } from "react-hot-toast";
 import { useState } from 'react';
 import { useMutation } from 'convex/react';
+import { useRouter } from 'next/navigation'
+import { api } from '@/convex/_generated/api';
 
+
+ 
 
 
 
 function EditFrontPageForm() {
+  const router = useRouter()
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const updateLandingPage = useMutation('updateLandingPage');
+  const updatePosts = useMutation(api.posts.updatePosts)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateLandingPage({ title, description });
+      await updatePosts({ title, description });
       toast.success('Landing page updated successfully');
     } catch (err) {
       toast.error('Failed to update landing page');
     }
+    router.push('/')
   };
 
 
