@@ -1,11 +1,11 @@
 'use client'
+
 import Image from "next/image";
 
 import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
-
 
 
  function Landingpage() {
@@ -58,6 +58,6 @@ console.log(posts);
 
     </main>
   );
-}
+ }
 
 export default Landingpage;

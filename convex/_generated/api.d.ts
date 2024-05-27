@@ -14,7 +14,6 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as controllerPages_updateLandingPage from "../controllerPages/updateLandingPage.js";
 import type * as events from "../events.js";
 import type * as images from "../images.js";
 import type * as posts from "../posts.js";
@@ -28,7 +27,6 @@ import type * as posts from "../posts.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  "controllerPages/updateLandingPage": typeof controllerPages_updateLandingPage;
   events: typeof events;
   images: typeof images;
   posts: typeof posts;

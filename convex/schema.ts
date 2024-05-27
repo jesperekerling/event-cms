@@ -14,5 +14,6 @@ export default defineSchema({
   posts: defineTable({
     description: v.string(),
     title: v.string(),
+    
   }),
 });
